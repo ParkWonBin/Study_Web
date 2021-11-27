@@ -1,10 +1,8 @@
-# Web-Study
 
-# Web-Study
-
+## [Mac 에서 VScode로 Web_Dev 세팅](https://www.youtube.com/watch?v=J8JPPcxr8Q8)
 
 
-### 반응혀 웹에 따른 서식 변경 예시
+## 반응형 웹에 따른 서식 변경 예시
 ```html
 <html>
     <header>
