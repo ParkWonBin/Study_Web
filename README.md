@@ -8,7 +8,7 @@ join(Arr,",")
 
 // JS
 "Hellow World".includes("Hellow")
-"1,2,3".split(","c).includes("1")
+"1,2,3".split(",").includes("1")
 Arr = "1,2,3".split(",")
 Arr.join(",")
 
