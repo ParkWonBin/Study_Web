@@ -5,13 +5,14 @@
 "1,2,3".split(","c).contains("1")
 Arr = "1,2,3".split(","c)
 join(Arr,",")
+Arr.Count
 
 // JS
 "Hellow World".includes("Hellow")
 "1,2,3".split(",").includes("1")
 Arr = "1,2,3".split(",")
 Arr.join(",")
-
+Arr.length
 ```
 
 
