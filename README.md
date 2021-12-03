@@ -1,6 +1,21 @@
+## JS 문법 정리
+```JS
+// VB.NET
+"Hellow World".contains("Hellow")
+"1,2,3".split(","c).contains("1")
+Arr = "1,2,3".split(","c)
+join(Arr,",")
+
+// JS
+"Hellow World".includes("Hellow")
+"1,2,3".split(","c).includes("1")
+Arr = "1,2,3".split(",")
+Arr.join(",")
+
+```
+
 
 ## [Mac 에서 VScode로 Web_Dev 세팅](https://www.youtube.com/watch?v=J8JPPcxr8Q8)
-
 
 ## 반응형 웹에 따른 서식 변경 예시
 ```html
