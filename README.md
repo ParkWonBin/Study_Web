@@ -1,5 +1,5 @@
 ##### JS Array 초기화
-```
+```JS
 Arr1 = new Array(3).fill({"totoal":0, "stay":0} }) // 각 위치에 같은 reference 들어감
 Arr2 = new Array(3).fill(null).map(x=>{return{"totoal":0, "stay":0} }) // 각 위치에 각각의 value 초기화됨
 
