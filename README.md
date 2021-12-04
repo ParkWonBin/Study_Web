@@ -1,3 +1,9 @@
+##### JS 요일 구하기
+```JS
+function GetWeekDaty(Year,Month, Day) {
+return "SUN,MON,TUE,WED,THU,FRI,SAT".split(",")[new Date( [Year,Month,Day].join("-") ).getDay()]
+}
+```
 ##### JS Distinct 중복제거
 ```JS
 Arr = Arr.filter((v,i)=> Arr.indexOf(v)==i) // 중복값 제거
