@@ -1,3 +1,12 @@
+##### JS Array 초기화
+```
+Arr1 = new Array(3).fill({"totoal":0, "stay":0} }) // 각 위치에 같은 reference 들어감
+Arr2 = new Array(3).fill(null).map(x=>{return{"totoal":0, "stay":0} }) // 각 위치에 각각의 value 초기화됨
+
+Arr1[0].total++ // Arr1은 0,1,2 위치에서 모두 같은 ref를 사용하기 때문에, 모든 원소의 total이 증가함
+Arr2[0].total++ // Arr2는 0,1,2 위치에서 각각 다른 ref를 사용(다른 값으로 입력)되었기 때문에 해당 위치의 total만 증가함
+```
+
 ##### JS 요일 구하기
 ```JS
 function GetWeekDaty(Year,Month, Day) {
