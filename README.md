@@ -1,8 +1,10 @@
 ## JS 특이한 문법
 #### 누적계산
 ##### [JS - Reduce](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)  
-누산기 (acc), 현재 값 (cur), 현재 인덱스 (idx), 원본 배열 (src)
 ```JS
+Arr.Reduce((acc, cur, idx, src)=> somthing , seed)
+Arr.Reduce(function(acc, cur, idx, src){return something } , seed)
+// 누산기 (acc), 현재 값 (cur), 현재 인덱스 (idx), 원본 배열 (src)
 "123456789".split("").reduce((acc,crt)=>{return Number(acc)+Number(crt)})
 "123456789".split("").reduce((acc,crt)=>{return acc+Number(crt)},0) // 초기값 seed 명시
 ```
