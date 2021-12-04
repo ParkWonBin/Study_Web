@@ -1,3 +1,14 @@
+##### JS 형변환
+```JS 
+//ToString
+s = s+"" // 문자열을 더해 문자열로 형변환
+//ToInt
+s = 0+s // 숫자에 더해 숫자로 형변환
+s = Number(s) // 숫자로 형변환
+s = parseInt(s) // 정수로 변환
+s = parseFloat(s) // 실수로 변환
+```
+
 ##### JS Array 초기화
 ```JS
 Arr1 = new Array(3).fill({"totoal":0, "stay":0} }) // 각 위치에 같은 reference 들어감
