@@ -1,4 +1,17 @@
 ## JS 특이한 문법
+#### 누적계산
+##### [JS - Reduce](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)  
+누산기 (acc), 현재 값 (cur), 현재 인덱스 (idx), 원본 배열 (src)
+```JS
+"123456789".split("").reduce((acc,crt)=>{return Number(acc)+Number(crt)})
+"123456789".split("").reduce((acc,crt)=>{return acc+Number(crt)},0) // 초기값 seed 명시
+```
+##### [Linq - Aggrigete](https://linqsamples.com/linq-to-objects/aggregation/Aggregate-seed-lambda-vb)
+```VB
+"123456789".split(""c).Aggregate(Function(acc, crt) acc + crt)
+"123456789".split(""c).Aggregate(0, Function(acc, crt) acc + crt) '초기값 seed 명시
+```
+
 #### [slice(start[, end])](https://im-developer.tistory.com/103)
 ```JS
 var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
