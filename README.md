@@ -1,3 +1,8 @@
+##### JS Distinct 중복제거
+```JS
+Arr = Arr.filter((v,i)=> Arr.indexOf(v)==i) // 중복값 제거
+Arr = [...new Set(Arr)] // 중복값 제거
+```
 ##### JS 이진수 변환
 ```JS
 3 | 15 // 15 두 수를 이진수로 변환한 후 OR 연산, 결과를 다시 숫자로 변환
