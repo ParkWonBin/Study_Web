@@ -10,6 +10,7 @@ Arr.Reduce(function(acc, cur, idx, src){return something } , seed)
 
 Math.max.apply(null,[1,2,3,2,1])
 Math.max(...[1,2,3,2,1])
+Math.max(1,2,3,2,1)
 ```
 ##### [Linq - Aggrigete](https://linqsamples.com/linq-to-objects/aggregation/Aggregate-seed-lambda-vb)
 ```VB
