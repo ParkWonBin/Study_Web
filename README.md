@@ -1,4 +1,4 @@
-## JS 특이한 문법
+
 #### 누적계산
 ##### [JS - Reduce](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)  
 ```JS
@@ -12,6 +12,15 @@ Arr.Reduce(function(acc, cur, idx, src){return something } , seed)
 ```VB
 "123456789".split(""c).Aggregate(Function(acc, crt) acc + crt)
 "123456789".split(""c).Aggregate(0, Function(acc, crt) acc + crt) '초기값 seed 명시
+```
+
+## JS 특이한 문법
+#### [정렬 관련](https://hianna.tistory.com/409)
+```JS
+arr = "1,2,10,4".split(",")
+arr.sort() // [1,10,2,4]
+arr.sort((a,b)=> a-b ) // [1,2,4,10]
+arr.sort((a,b)=> b-a ) // [10,4,2,1]
 ```
 
 #### [slice(start[, end])](https://im-developer.tistory.com/103)
