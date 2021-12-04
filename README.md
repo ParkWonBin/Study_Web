@@ -25,6 +25,9 @@ console.log(arr1); // [11, 12]
 Arr = "1,2,3".split(","c)
 join(Arr,",")
 Arr.Count
+//Linq
+ArrArr = "1,2,3|4,5,6|7,8,9".split("|"c).select(function(x) x.split(",")).ToArray
+join(ArrArr.select(function(x) x.join(",")).ToArray , "|")
 
 // JS
 "Hellow World".includes("Hellow")
@@ -32,6 +35,11 @@ Arr.Count
 Arr = "1,2,3".split(",")
 Arr.join(",")
 Arr.length
+// Array Method
+ArrArr = "1,2,3|4,5,6|7,8,9".split("|").map(function(x){ return x.split(",")})
+ArrArr = "1,2,3|4,5,6|7,8,9".split("|").map((x)=> x.split(",") )
+ArrArr.map(function(x){return x.join(",")}).join("|")
+ArrArr.map((x)=> x.join(",") ).join("|")
 ```
 
 
