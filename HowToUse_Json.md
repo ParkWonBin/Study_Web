@@ -1,4 +1,39 @@
-### for문 사용 
+##### JSON Array 초기화
+```JS
+Arr1 = new Array(3).fill({"totoal":0, "stay":0} }) // 각 위치에 같은 reference 들어감
+Arr2 = new Array(3).fill(null).map(x=>{return{"totoal":0, "stay":0} }) // 각 위치에 각각의 value 초기화됨
+
+Arr1[0].total++ // Arr1은 0,1,2 위치에서 모두 같은 ref를 사용하기 때문에, 모든 원소의 total이 증가함
+Arr2[0].total++ // Arr2는 0,1,2 위치에서 각각 다른 ref를 사용(다른 값으로 입력)되었기 때문에 해당 위치의 total만 증가함
+```
+
+##### JSON 사용하여 문제 해결
+[관련문제](https://programmers.co.kr/learn/courses/30/lessons/42889)
+```JS
+function solution(N, stages) {
+    var Arr = new Array(N+2).fill(null).map((x,i)=>{ return{"stage":i,"clear":0, "stay":0, "fail":0} })
+    
+    // 해당 스테이지에 막혀있는 인원
+    for(var i=0; i<stages.length; i++){ Arr[stages[i]]["stay"]++ }
+    
+    // 해당 스테이지 누적 clear 횟수
+    for(var i=N; i>0; i--){ Arr[i].clear = Arr[i+1].clear + Arr[i+1].stay }
+    
+    // 실패율 누적
+    for(var i=0; i<N+1; i++){ Arr[i].fail = Arr[i].stay /  (Arr[i].stay + Arr[i].clear)}
+    
+    // 불필요한 데이터 제거
+    Arr.shift(); Arr.pop()
+    
+    // 정렬
+    Arr.sort((a,b)=>b["fail"]-a["fail"])
+    
+    // console.table(Arr)
+    return Arr.map(x=> x['stage']) ;
+}
+```
+
+### JSON for문 사용 
 [문자열 대체](https://programmers.co.kr/learn/courses/30/lessons/81301)
 ```js
 function solution(s) {
