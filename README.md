@@ -1,3 +1,22 @@
+## JS 특이한 문법
+#### [slice(start[, end])](https://im-developer.tistory.com/103)
+```JS
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var arr1 = arr.slice(3, 5); // [4, 5]
+var arr2 = arr.slice(undefined, 5); // [1, 2, 3, 4, 5]
+var arr3 = arr.slice(-3); // [8, 9, 10]
+var arr4 = arr.slice(-3, 9); // [8, 9]
+```
+
+#### [splice(start[, deleteCount[, item1[, item2[, ...]]]])](https://im-developer.tistory.com/103)
+```JS
+// 
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+var arr1 = arr.splice(10, 2, 'a', 'b', 'c');
+console.log(arr); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "a", "b", "c"]
+console.log(arr1); // [11, 12]
+```
+
 ## JS 문법 정리
 ```JS
 // VB.NET
