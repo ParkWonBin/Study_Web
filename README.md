@@ -1,3 +1,11 @@
+##### JS 이진수 변환
+```JS
+(15).toSting(2) // 1111
+// & : 비트연산자 AND
+// | : 비트연산자 OR
+// && : 조건문 AND
+// || : 조건문 OR
+```
 
 #### 누적계산
 ##### [JS - Reduce](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)  
