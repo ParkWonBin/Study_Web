@@ -7,6 +7,9 @@ Arr.Reduce(function(acc, cur, idx, src){return something } , seed)
 // 누산기 (acc), 현재 값 (cur), 현재 인덱스 (idx), 원본 배열 (src)
 "123456789".split("").reduce((acc,crt)=>{return Number(acc)+Number(crt)})
 "123456789".split("").reduce((acc,crt)=>{return acc+Number(crt)},0) // 초기값 seed 명시
+
+Math.max.apply(null,[1,2,3,2,1])
+Math.max(...[1,2,3,2,1])
 ```
 ##### [Linq - Aggrigete](https://linqsamples.com/linq-to-objects/aggregation/Aggregate-seed-lambda-vb)
 ```VB
