@@ -1,3 +1,16 @@
+##### JS Dictionary
+```JS
+dic = {} //dic 생성
+dic["key"] = 123 // dic에 key값 등록
+!isNaN(dic["key"]) // 해당 값이 있는지 확인
+
+Object.keys(dic) // dic의 key값 Array로 반환
+Object.keys(dic).includes(key) // VB로 치면 dic.keys().contains(key) 
+
+// key 와 val 출력
+for (var key in dic) { console.log("key : " + key +", value : " + dic[key]); }
+
+```
 ##### JS 형변환
 ```JS 
 //ToString
