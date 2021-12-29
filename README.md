@@ -137,13 +137,13 @@ PuTTYgen > Load (기존에 SSH(.ppk) 파일 읽어오기)
 10.6 Error > Could not establish connection  
 ``` 만약 연결 중에 에러가 발생하면 config 저장 경로에서 known_hosts 삭제 ```
 
-10.7 VSCode에서 PuTTY 터미널 이용
+10.7 VSCode에서 PuTTY 터미널 이용  
 ``` new VSCode Window(과정 10.5) 에서 터미널(T) > 새 터미널 ```
 
 ## 11. VSCode로 코딩할 준비 
 #### 1. Flask 설치
-- 참고 : [오라클 클라우드 Ubuntu 20.04 인스턴스 기본 설정](https://www.wsgvet.com/cloud/6)
-- 참고 : [서버에 Flask 설치하기][서버에 Flask 설치하기]
+참고 : [오라클 클라우드 Ubuntu 20.04 인스턴스 기본 설정](https://www.wsgvet.com/cloud/6)   
+참고 : [서버에 Flask 설치하기][서버에 Flask 설치하기]   
 
 
 ```shell
@@ -194,7 +194,7 @@ $ sudo reboot # 재부팅
 #### 3. 서버 재부팅 후 확인사항
 ``` $ sudo reboot ``` 후 확인할 것
 1. config 위치에서 known user 파일 삭제할 것
-2. VS Code에서 호스트 연결 끊기
+2. VS Code에서 호스트 연결 끊기  
 ``` VSCode > [F1] > Remote-SSH: Uninstall VS Code Server from Host ```
 3. VS Code에서 호스트 재연결
 
