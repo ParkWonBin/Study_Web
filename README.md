@@ -32,38 +32,40 @@
 5.4. 인스턴스 생성 시 Volum 제한 50GB로 설정 할 것  
 
 ## 6. 인스턴스 고정 IP 설정 및 포트 개방
-- 참고 : [고정 IP 설정하기][오라클 클라우드 고정 IP 설정]
-- 참고 : [포트 개방하기][오라클 클라우드 포트 개방]
-열어야 하는 포트 종류 
+참고 : [고정 IP 설정하기][오라클 클라우드 고정 IP 설정]  
+참고 : [포트 개방하기][오라클 클라우드 포트 개방]  
+
+```text
+# 열어야 하는 포트 종류 
 80 : http
 443 : https 
 5000 : VScode 연결
+```
 
 ## 7. 인스턴스에 도메인 연결
-- 참고 : [DNS 구매 - GoDaddy][GoDaddy_URL]
-- 참고 : [DNS 구매 후 오라클 서버에 적용][인스턴스에 도메인 연결]
+참고 : [DNS 구매 - GoDaddy][GoDaddy_URL]  
+참고 : [DNS 구매 후 오라클 서버에 적용][인스턴스에 도메인 연결]  
   
 7.1. GoDadday에서 이메일 인증 안하면 ns(네임서버) 설정 중 오류 발생할 수 있음
 7.2. GoDaddy > 내제품 > 도메인 메뉴 > DNS 관리  >  네임서버 변경 > 내 자신의 네임서버 입력(고급)  
 7.3. 오라클 클라우드 > DNS ZONE > Nameservers 확인  
 
 ## 8. PuTTY - 오라클 클라우드 서버 접속하기
-- 참고 : [오라클 클라우드 서버 접속][오라클 클라우드 서버 접속]  
+참고 : [오라클 클라우드 서버 접속][오라클 클라우드 서버 접속]  
 
 8.1. PuTTY > SSH > Auth 파일 설정
 8.2. PuTTY > Session > IP,Port 저장 > 해당 세션 더블클릭
 
-비고1 : 관리자 계정으로 로그인 시 Login As 위치에 "ubuntu" 입력  
-비고2 : 관리자 계정의 ID/PW는 SSH 생성 시 설정했던 ID/PW 입니다.  
-비고3 : PW 입력 시 화면변화 없으니 주의. (키보드 눌려도 *로 글자수 표시되지 않음)  
-
+비고1 : 관리자 계정으로 로그인 시 Login As 위치에 "ubuntu" 입력    
+비고2 : 관리자 계정의 ID/PW는 SSH 생성 시 설정했던 ID/PW 입니다.    
+비고3 : PW 입력 시 화면변화 없으니 주의. (키보드 눌려도 *로 글자수 표시되지 않음)   
 
 ## 9. 서버 내 계정 생성 및 권한 부여
-참고1 : [인스턴스에 사용자 추가][Linux 인스턴스 사용자 추가]
-참고2 : [ubuntu 사용자 root 권한 주기][사용자 권한 주기]
-참고3 : [SSH key 추가로 로그인][리눅스 SSH key 추가로 로그인]
-참고4 : [PuTTY 자동로그인 설정][PuTTY 자동로그인 설정]
-참고5 : [VIM 사용법][vim 사용법]
+참고1 : [인스턴스에 사용자 추가][Linux 인스턴스 사용자 추가]  
+참고2 : [ubuntu 사용자 root 권한 주기][사용자 권한 주기]  
+참고3 : [SSH key 추가로 로그인][리눅스 SSH key 추가로 로그인]  
+참고4 : [PuTTY 자동로그인 설정][PuTTY 자동로그인 설정]  
+참고5 : [VIM 사용법][vim 사용법]  
 
 ```shell
 # 1. 계정생성
@@ -103,7 +105,7 @@ $ cat id_rsa # 파일 수정 => 내용 보기 목적
 ```
 
 ## 10. VSCode로 PuTTY 연동
-참고  : [Could not establish connection](https://kkkapuq.tistory.com/108)
+참고 : [Could not establish connection](https://kkkapuq.tistory.com/108)
 VSCode 확장 : "Remot - development"
 
 10.1. 원격 탐색기에 도메인 입력  
@@ -129,14 +131,14 @@ PuTTYgen > Load (기존에 SSH(.ppk) 파일 읽어오기)
 *(10.3에 IdentityFile 경로에 해당하는 파일을 작성한 것)
 ```
 
-10.5 VSCode Window로 서버 들어가기
-원격 탐색기 > SSH TARGETS > 도메인 > 새창으로 열기
+10.5 VSCode Window로 서버 들어가기  
+``` 원격 탐색기 > SSH TARGETS > 도메인 > 새창으로 열기 ```
 
-10.6 Error > Could not establish connection
-만약 연결 중에 에러가 발생하면 config 저장 경로에서 known_hosts 삭제 
+10.6 Error > Could not establish connection  
+``` 만약 연결 중에 에러가 발생하면 config 저장 경로에서 known_hosts 삭제 ```
 
 10.7 VSCode에서 PuTTY 터미널 이용
-new VSCode Window(과정 10.5) 에서 터미널(T) > 새 터미널 
+``` new VSCode Window(과정 10.5) 에서 터미널(T) > 새 터미널 ```
 
 ## 11. VSCode로 코딩할 준비 
 #### 1. Flask 설치
