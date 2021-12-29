@@ -34,6 +34,10 @@
 ## 6. 인스턴스 고정 IP 설정 및 포트 개방
 - 참고 : [고정 IP 설정하기][오라클 클라우드 고정 IP 설정]
 - 참고 : [포트 개방하기][오라클 클라우드 포트 개방]
+열어야 하는 포트 종류 
+80 : http
+443 : https 
+5000 : VScode 연결
 
 ## 7. 인스턴스에 도메인 연결
 - 참고 : [DNS 구매 - GoDaddy][GoDaddy_URL]
@@ -98,7 +102,7 @@ $ cat id_rsa # 파일 수정 => 내용 보기 목적
 # SSH(.ppk) 파일만 있으면 해당 도메인에 user id 페스워드 없이 로그인 가능
 ```
 
-## 10. VSCode로 PuTTY 연동해서 사용하기
+## 10. VSCode로 PuTTY 연동
 참고  : [Could not establish connection](https://kkkapuq.tistory.com/108)
 VSCode 확장 : "Remot - development"
 
@@ -119,11 +123,17 @@ Host wbpark.info
 10.4 key 변환
 10.4 PuTTYgen > Load (기존에 SSH(.ppk) 파일 읽어오기) > Conversions > Export OpenSSH key > 해당 config 파일 있는 위치에 확장자 표시 없이 "모든파일"로 저장 (10.3에 IdentityFile 경로/파일명과 일치)
 
-10.5 Error > Could not establish connection
-만약 연결 중에 에러가 발생하면 config 경로에서 known... 으로 생성된 파일 존재 시 삭제 진행할 것
+10.5 VSCode Window로 서버 들어가기
+원격 탐색기 > SSH TARGETS > 도메인 > 새창으로 열기
 
+10.6 Error > Could not establish connection
+만약 연결 중에 에러가 발생하면 config 저장 경로에서 known_hosts 삭제 
 
-## 11. PuTTY - Flask 설치 
+10.7 VSCode에서 PuTTY 터미널 이용
+new VSCode Window(과정 10.5) 에서 터미널(T) > 새 터미널 
+
+## 11. VSCode로 코딩할 준비 
+#### 1. Flask 설치
 - 참고 : [오라클 클라우드 Ubuntu 20.04 인스턴스 기본 설정](https://www.wsgvet.com/cloud/6)
 - 참고 : [서버에 Flask 설치하기][서버에 Flask 설치하기]
 
@@ -149,6 +159,42 @@ $ source venv/bin/activate
 
 ## 플라스크 설치
 $ pip3 install flask
+$ flask --version 
+$ FLASK_APP=app.py flask run
+```
+
+#### 2. Ubuntu에서 포트 개방 (PuTTY)
+참고 : [Oracle Cloud 포트 열기](https://kibua20.tistory.com/124)
+* 위의 링크에서 **"2.VM Instance에서 방화벽을 설정 변경"** 부분이 중요
+* root 계정으로 작업할 것
+* PuTTY에서 붙여넣기는 [우클릭] (단, 손으로 타이핑 권장.)
+* 웹에서 내용 복붙할 경우 오류 발생할 수 있음.(공백문자 때문으로 추청) 
+
+```shell
+# IP  테이블 상태 확인 
+$ sudo iptables --list
+# 윗부분에 ACCEPT, REJECT 관련해서 자세히 볼 것
+
+$ sudo iptables -I INPUT 5 -i ens3 -p tcp --dport {포트번호} -m state --state NEW,ESTABLISHED -j ACCEPT
+
+$ sudo apt-get install iptables-persistent  # 패키지 설치
+$ sudo netfilter-persistent save​ ​ # 방화벽 정책을 저장
+$ sudo netfilter-persistent start # 방화벽 정책을 로드
+$ sudo reboot # 재부팅
+```
+
+#### 3. 서버 재부팅 후 확인사항
+``` $ sudo reboot ``` 후 확인할 것
+1. config 위치에서 known user 파일 삭제할 것
+2. VS Code에서 호스트 연결 끊기
+``` VSCode > [F1] > Remote-SSH: Uninstall VS Code Server from Host ```
+3. VS Code에서 호스트 재연결
+
+#### 4. Flask로 웹서버 host 
+```shell
+# VS Code window에 PuTTY연결시켜놓고
+# 위에서 만들어놓은 가상환경 폴더 진입 후 호스팅 시작
+flask run --host=0.0.0.0
 ```
 
 #### 레퍼런스 및 부연설명
@@ -173,8 +219,8 @@ chmod 관련 권한 코드 :
 ex ) 소유자 모든권한, 구룹과 기타는 권한 전혀 없음의 경우
 111 => 7, 000 => 0 이므로 해당 코드는 700이 된다. 
 ```
-
 참고: [리눅스 700 권한 관련][리눅스 권한관련]
+
 
 
 [Flask 웹서버 구동][init_Flask]
