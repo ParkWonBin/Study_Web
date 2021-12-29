@@ -106,22 +106,28 @@ $ cat id_rsa # 파일 수정 => 내용 보기 목적
 참고  : [Could not establish connection](https://kkkapuq.tistory.com/108)
 VSCode 확장 : "Remot - development"
 
-10.1. 원격 탐색기에 도메인 입력
-VSCode 리본 > SSH Targets [+] 버튼 클릭 > IP 입력 (wbpark@wbpark.info)
+10.1. 원격 탐색기에 도메인 입력  
+VSCode 리본 > SSH Targets [+] 버튼 클릭 > IP 입력 (wbpark@wbpark.info)  
 
-10.2. config 위치 설정
-SSH Targets [톱니바퀴] > C:\Users\pwb1128\.ssh\config
+10.2. config 위치 설정  
+SSH Targets [톱니바퀴] > C:\Users\pwb1128\.ssh\config  
 
-10.3. config 파일 수정
-SSH Targets [톱니바퀴] > .../config 클릭 > 파일 수정
+10.3. config 파일 수정  
+SSH Targets [톱니바퀴] > .../config 클릭 > 파일 수정  
+
 ```SSHConfig
 Host wbpark.info
   HostName wbpark.info
   User wbpark
   IdentityFile C:\Users\pwb1128\.ssh\wbpark_wbpark
 ```
-10.4 key 변환
-10.4 PuTTYgen > Load (기존에 SSH(.ppk) 파일 읽어오기) > Conversions > Export OpenSSH key > 해당 config 파일 있는 위치에 확장자 표시 없이 "모든파일"로 저장 (10.3에 IdentityFile 경로/파일명과 일치)
+10.4 key 변환  
+```text
+PuTTYgen > Load (기존에 SSH(.ppk) 파일 읽어오기) 
+> Conversions > Export OpenSSH key 
+> 해당 config 파일 있는 위치에 확장자 표시 없이 "모든파일"로 저장 
+*(10.3에 IdentityFile 경로에 해당하는 파일을 작성한 것)
+```
 
 10.5 VSCode Window로 서버 들어가기
 원격 탐색기 > SSH TARGETS > 도메인 > 새창으로 열기
