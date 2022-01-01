@@ -135,6 +135,18 @@ ssh user@hostname -i {저장한 pem 파일 경로}.pem
 ```
 - 소문자 -i : input
 
+#### Terinal에서 바로가기로 만들기 
+```test
+파일 생성 
+파일 경로 : Terminal 기본경로
+파일 이름 : Login_server.sh
+파일 내용 : ssh user@hostname -i {pem 파일 경로}
+
+호출 방법 
+ - 방법 1 : Teminal 열기 > $ sh Login_server.sh
+ - 방법 2 : Teminal 열기 > $ bash Login_server.sh
+```
+
 ## 10. VSCode로 PuTTY 연동
 참고 : [Could not establish connection](https://kkkapuq.tistory.com/108)
 VSCode 확장 : "Remot - development"
