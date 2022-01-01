@@ -8,8 +8,8 @@
 ## 2. 오라클 클라우드 가입 및 로그인
 ##### 아마존은 ID, PW 뿐만아니라 약식 이름까지 key로 넣어야한다. 
 참고 : [오라클 클라우드 가입][오라클 클라우드 가입]  
-2.1  로그인 > 약식 이름 : {가입 시 입력한 약식 이름 : pwb1128}  
-2.2. 로그인 > 계정 이름 : {가입 시 입력한 Email : pwb1128@*****}  
+2.1  로그인 > 약식 이름 : {가입 시 입력한 약식 이름 : pwb1*****}  
+2.2. 로그인 > 계정 이름 : {가입 시 입력한 Email : pwb1*****@*****}  
 2.3. 로그인 > 비밀 번호 : {가입 시 입력한 PW}  
 
 ## 3. VCN 네트워크 생성
@@ -53,8 +53,8 @@
 ## 8. PuTTY - 오라클 클라우드 서버 접속하기
 참고 : [오라클 클라우드 서버 접속][오라클 클라우드 서버 접속]  
 
-8.1. PuTTY > SSH > Auth 파일 설정
-8.2. PuTTY > Session > IP,Port 저장 > 해당 세션 더블클릭
+8.1. PuTTY > SSH > Auth 파일 설정  
+8.2. PuTTY > Session > IP,Port 저장 > 해당 세션 더블클릭  
 
 비고1 : 관리자 계정으로 로그인 시 Login As 위치에 "ubuntu" 입력    
 비고2 : 관리자 계정의 ID/PW는 SSH 생성 시 설정했던 ID/PW 입니다.    
@@ -102,6 +102,33 @@ $ cat id_rsa # 파일 수정 => 내용 보기 목적
 # 5.3. Connection > SSH > Auth > [Browse] > SSH(.ppk) 연결
 # 5.4. Session > Saved Sessions = 이름 입력 > Save
 # SSH(.ppk) 파일만 있으면 해당 도메인에 user id 페스워드 없이 로그인 가능
+```
+### Mac으로 로그인 연결
+참고 :  [brew 다운로드](https://brew.sh/)  
+참고 :  [Mac putty](https://www.ssh.com/academy/ssh/putty/mac)  
+
+- Mac은 Putty 없이 터미널로 서버 진입이 가능하다.
+- SSH 파일을 .ppk 확장자로 갖고있을 경우 putty를 다운받아 .pem 파일로 변환하여 사용할 것
+
+#### brew, putty 다운로드 
+```shell 
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+$ /opt/homebrew/bin/brew --version
+# 다운로드 된 brew 경로 확인할 것.
+
+$ /opt/homebrew/bin/brew install putty
+$ /opt/homebrew/bin/puttygen --version
+# 다운로드 된 putty, puttygen 확인
+```
+
+#### ppk파일 pem으로 변환하기 
+```shell 
+$ /opt/homebrew/bin/puttygen {변환할 ppk파일 경로}.ppk -O private-openssh -o {저장할 pem 파일 경로}.pem
+```
+
+#### Terminal로 서버 접속하기
+```shell 
+ssh user@hostname -i {저장한 pem 파일 경로}.pem
 ```
 
 ## 10. VSCode로 PuTTY 연동
