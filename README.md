@@ -103,25 +103,27 @@ $ cat id_rsa # 파일 수정 => 내용 보기 목적
 # 5.4. Session > Saved Sessions = 이름 입력 > Save
 # SSH(.ppk) 파일만 있으면 해당 도메인에 user id 페스워드 없이 로그인 가능
 ```
-### Mac으로 로그인 연결
+## 10. Mac  로그인 연결
 참고 :  [brew 다운로드](https://brew.sh/)  
 참고 :  [Mac putty](https://www.ssh.com/academy/ssh/putty/mac)  
 
 - Mac은 Putty 없이 터미널로 서버 진입이 가능하다.
 - SSH 파일을 .ppk 확장자로 갖고있을 경우 putty를 다운받아 .pem 파일로 변환하여 사용할 것
 
-#### brew, putty 다운로드 
+### 10.1 brew 다운로드 
 ```shell 
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 $ /opt/homebrew/bin/brew --version
 # 다운로드 된 brew 경로 확인할 것.
-
+```
+### 10.2 putty 다운로드
+```shell
 $ /opt/homebrew/bin/brew install putty
 $ /opt/homebrew/bin/puttygen --version
 # 다운로드 된 putty, puttygen 확인
 ```
 
-#### ppk파일 pem으로 변환하기 
+#### 10.3 ppk파일 pem으로 변환하기 
 ```shell 
 $ /opt/homebrew/bin/puttygen {변환할 ppk파일 경로}.ppk -O private-openssh -o {저장할 pem 파일 경로}.pem
 ```
@@ -129,13 +131,13 @@ $ /opt/homebrew/bin/puttygen {변환할 ppk파일 경로}.ppk -O private-openssh
 - 대문자 -O : option
 - 소문자 -o : output 파일 경로
 
-#### Terminal로 서버 접속하기
+### 10.4 Terminal로 서버 접속하기
 ```shell 
 ssh user@hostname -i {저장한 pem 파일 경로}.pem
 ```
 - 소문자 -i : input
 
-#### Terinal에서 바로가기로 만들기 
+### 10.5 Terinal에서 바로가기로 만들기 
 ```test
 파일 생성 
 파일 경로 : Terminal 기본경로
@@ -147,44 +149,61 @@ ssh user@hostname -i {저장한 pem 파일 경로}.pem
  - 방법 2 : Teminal 열기 > $ bash Login_server.sh
 ```
 
-## 10. VSCode로 PuTTY 연동
-참고 : [Could not establish connection](https://kkkapuq.tistory.com/108)
-VSCode 확장 : "Remot - development"
-
-10.1. 원격 탐색기에 도메인 입력  
-VSCode 리본 > SSH Targets [+] 버튼 클릭 > IP 입력 (wbpark@wbpark.info)  
-
-10.2. config 위치 설정  
-SSH Targets [톱니바퀴] > C:\Users\pwb1128\.ssh\config  
-
-10.3. config 파일 수정  
-SSH Targets [톱니바퀴] > .../config 클릭 > 파일 수정  
-
-```SSHConfig
-Host wbpark.info
-  HostName wbpark.info
-  User wbpark
-  IdentityFile C:\Users\pwb1128\.ssh\wbpark_wbpark
+## 11 Window 서버 로그인 연결
+### 11.1 config 파일 생성하기
+```tesx
+파일 생성
+파일 경로 : C:\Users\{사용자명}\.ssh
+파일 이름 : config   (* 확장자 없음)
+파일 내용 : 
+---
+Host {Host URL or 원격 IP}
+  HostName {HostName}
+  User {new_user}
+  IdentityFile {해당 User의 SSH key경로}
+Host {Host URL or 원격 IP}
+  HostName {HostName}
+  User {new_user}
+  IdentityFile {해당 User의 SSH key경로}---
 ```
-10.4 key 변환  
+### 11.2 IdentityFile 생성
 ```text
 PuTTYgen > Load (기존에 SSH(.ppk) 파일 읽어오기) 
 > Conversions > Export OpenSSH key 
-> 해당 config 파일 있는 위치에 확장자 표시 없이 "모든파일"로 저장 
-*(10.3에 IdentityFile 경로에 해당하는 파일을 작성한 것)
+> 11.1에서 설정한 IdentityFile 경로에 저장
+> 해당 파일은 확장자 없이 저장하기 (저장 형식 = " 모든 파일)
+```
+### 11.3 터미널에서 바로가기 만들기
+```tesx
+파일 생성
+파일 경로 : C:\Users\{사용자명}
+파일 이름 : login_server.bat
+파일 내용 : 
+---
+:: 11.2에 설정한 내용과 일치하도록 작성
+echo {new_user}@{HostName} 로그인 시도
+
+ssh {new_user}@{Host URL or 원격 IP}
+:: SSH는 11.1과정 config의 정보 토대로 자동 매칭됩니다.
 ```
 
-10.5 VSCode Window로 서버 들어가기  
+
+## 12. VSCode로 PuTTY 연동
+참고 : [Could not establish connection](https://kkkapuq.tistory.com/108)
+VSCode 확장 : "Remot - development"
+사전준비 필수 : 11.1 ~ 11.3 과정 선행되어야 함
+
+12.1 VSCode Window로 서버 들어가기  
 ``` 원격 탐색기 > SSH TARGETS > 도메인 > 새창으로 열기 ```
 
-10.6 Error > Could not establish connection  
+12.2 Error > Could not establish connection  
 ``` 만약 연결 중에 에러가 발생하면 config 저장 경로에서 known_hosts 삭제 ```
 
-10.7 VSCode에서 PuTTY 터미널 이용  
+12.3 VSCode에서 PuTTY 터미널 이용  
 ``` new VSCode Window(과정 10.5) 에서 터미널(T) > 새 터미널 ```
 
-## 11. VSCode로 코딩할 준비 
-#### 1. Flask 설치
+## 13. VSCode로 코딩할 준비 
+#### 13.1. Flask 설치
 참고 : [오라클 클라우드 Ubuntu 20.04 인스턴스 기본 설정](https://www.wsgvet.com/cloud/6)   
 참고 : [서버에 Flask 설치하기][서버에 Flask 설치하기]   
 
@@ -214,7 +233,7 @@ $ flask --version
 $ FLASK_APP=app.py flask run
 ```
 
-#### 2. Ubuntu에서 포트 개방 (PuTTY)
+#### 13.2. Ubuntu에서 포트 개방 (PuTTY)
 참고 : [Oracle Cloud 포트 열기](https://kibua20.tistory.com/124)
 * 위의 링크에서 **"2.VM Instance에서 방화벽을 설정 변경"** 부분이 중요
 * root 계정으로 작업할 것
@@ -234,14 +253,14 @@ $ sudo netfilter-persistent start # 방화벽 정책을 로드
 $ sudo reboot # 재부팅
 ```
 
-#### 3. 서버 재부팅 후 확인사항
+#### 13.3. 서버 재부팅 후 확인사항
 ``` $ sudo reboot ``` 후 확인할 것
 1. config 위치에서 known user 파일 삭제할 것
 2. VS Code에서 호스트 연결 끊기  
 ``` VSCode > [F1] > Remote-SSH: Uninstall VS Code Server from Host ```
 3. VS Code에서 호스트 재연결
 
-#### 4. Flask로 웹서버 host 
+#### 13.4. Flask로 웹서버 host 
 ```shell
 # VS Code window에 PuTTY연결시켜놓고
 # 위에서 만들어놓은 가상환경 폴더 진입 후 호스팅 시작
