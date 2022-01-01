@@ -155,8 +155,8 @@ ssh user@hostname -i {저장한 pem 파일 경로}.pem
 파일 생성
 파일 경로 : C:\Users\{사용자명}\.ssh
 파일 이름 : config   (* 확장자 없음)
-파일 내용 : 
----
+파일 내용 : (""" 사이에 있는 단락)
+"""
 Host {Host URL or 원격 IP}
   HostName {HostName}
   User {new_user}
@@ -165,6 +165,7 @@ Host {Host URL or 원격 IP}
   HostName {HostName}
   User {new_user}
   IdentityFile {해당 User의 SSH key경로}---
+"""
 ```
 ### 11.2 IdentityFile 생성
 ```text
@@ -174,17 +175,18 @@ PuTTYgen > Load (기존에 SSH(.ppk) 파일 읽어오기)
 > 해당 파일은 확장자 없이 저장하기 (저장 형식 = " 모든 파일)
 ```
 ### 11.3 터미널에서 바로가기 만들기
-```tesx
+```bat
 파일 생성
 파일 경로 : C:\Users\{사용자명}
 파일 이름 : login_server.bat
-파일 내용 : 
----
+파일 내용 : (""" 사이에 있는 단락)
+"""
 :: 11.2에 설정한 내용과 일치하도록 작성
 echo {new_user}@{HostName} 로그인 시도
 
 ssh {new_user}@{Host URL or 원격 IP}
 :: SSH는 11.1과정 config의 정보 토대로 자동 매칭됩니다.
+"""
 ```
 
 
