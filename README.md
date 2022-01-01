@@ -125,11 +125,15 @@ $ /opt/homebrew/bin/puttygen --version
 ```shell 
 $ /opt/homebrew/bin/puttygen {변환할 ppk파일 경로}.ppk -O private-openssh -o {저장할 pem 파일 경로}.pem
 ```
+- 첫번째 인자 : load할 파일 경로
+- 대문자 -O : option
+- 소문자 -o : output 파일 경로
 
 #### Terminal로 서버 접속하기
 ```shell 
 ssh user@hostname -i {저장한 pem 파일 경로}.pem
 ```
+- 소문자 -i : input
 
 ## 10. VSCode로 PuTTY 연동
 참고 : [Could not establish connection](https://kkkapuq.tistory.com/108)
