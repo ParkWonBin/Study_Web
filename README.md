@@ -193,7 +193,7 @@ ssh {new_user}@{Host URL or 원격 IP}
 시작 > cmd 들어가서 해당 file 실행시키는 방법으로 사용 가능합
 ```
 
-## 12. VSCode로 서버 연
+## 12. VSCode로 서버 연결
 참고 : [Could not establish connection](https://kkkapuq.tistory.com/108)
 준비 : 11.1, 11.2 과정 선행되어야 함
 
@@ -280,7 +280,7 @@ flask run --host=0.0.0.0
 ```
 
 
-## 14. 24시간 웹 호스팅 
+## 14. 24시간 백그라운드 웹 호스팅 
 - [nuhup 원격접속 해제해도 process 실행](https://9d4u.tistory.com/1203)
 - [flask 백그라운드 실행 및 종료](https://wooiljeong.github.io/server/flask_nohup/)
 
@@ -308,9 +308,143 @@ $ ps -ef
 $ kill {process id}
 ```
 
+
+## 15. 포트번호 없애고 http 연결 (nginx)
+참고 : [nginx 문서](https://nginx.org/en/linux_packages.html#Ubuntu)   
+참고 : [nginx 설명 및 설치 메뉴얼](https://juneyr.dev/nginx-basics)   
+
+
+
+```shell
+# nginx 설치하기
+$ sudo apt install nginx
+
+# nginx 서버 설정 확인하기
+$ sudo -s # root 계정으로 들어가기
+$ cd /etc/nginx/sites-available
+$ cat default 
+
+# 해당 경로에 서버 설정 입력하기
+# 현재 위치 : /etc/nginx/sites-available
+$ vi test_server
+# 파일 이름은 적당히 아무거나 입력해도 됨
+# 넣을 내용, 5000포트는 개발용 포트로, flask 기본 설정임
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {연결할 도메인 입력};
+    client_max_body_size 11m;
+    
+    location / { try_files $uri @flaskapp; }
+    location @flaskapp {
+        proxy_pass http://localhost:5000;
+        proxy_redirect off;
+        proxy_buffering off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+# vi 파일 수정이 끝나면 esc > ":wq" 로 탈출 
+
+# nginx에서 불러올 수 있도록 해당 파일 링크 만들기
+$ ln -s /etc/nginx/sites-available/test_server /etc/nginx/sites-enabled/test_server
+
+# nginx 재시작 후 도메인으로 들어가서 확인하기
+$ systemctl restart nginx
+```
+
+
+## 16. https 연결 및 보안 갱신
+- 참고 : [cert-bot 다운로드 관련](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04) 
+- 참고 : [cert-bot 으로 https 연결](https://velog.io/@pinot/Ubuntu-Nginx-환경에서-CertBot을-사용하여-https-사용하기)  
+- 참고 : [nWSGI 나중에 포트 보안 관련해서 공부할 것](https://co-de.tistory.com/27)
+
+ ```shell
+# certbot 다운로드
+$ sudo apt install certbot python3-certbot-nginx
+
+# sertbot에 도메인 입력
+$ sudo certbot —nginx -d {domain}
+# 이후 등장하는 입력값 및 선택지 입력
+# 1. 해당 certbot 관련 email 받을 주소 입력
+# 2. (A)gree
+# 3. Yes
+# 4. 2 # 1 or 2설정 나오는데, 2넣어야 https 사용 가능
+ ```
+ 
+```text
+개념설명 :  
+Flask는 개발용 웹서버인데, 보안 상 이유로 해당 서버를 nginx라는 웹서버로 한번 더 감싼다.
+Flask는 로컬호스팅으로 접근하고, nginx는 로컬호스트에 있는거 받아와서 클라이언트에게 전달.
+nWSGI는 포트 번호 포함해서 한번 더 웹서버를 감싸는 개념이라고 한다.
+
+https를 연결하려면 특정 사이트에 들어가서 무료 인증서 발급을 주기적으로 받아야하는데,
+certbot은 해당 주기마다 해당 사이트에서 인증서를 갱신해주는 로봇이다.
+```
+## 17. flask-sqlalchemy 연결
+- 참고 : [SQL Alchemy 사용 관련](https://velog.io/@poiuyy0420/%ED%8C%8C%EC%9D%B4%EC%8D%AC-Flask-DB-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0SQLAlchemy)
+
+```text
+할일 
+1. flask app.py 에 DB 관련해서 내용을 추가한다.
+2. 해당 DB정의와 관련하여 models.py 파일을 생성한다.
+```
+#### 17.1. flask app.py 전체 모양
+```python
+# app.py 전체 코드
+
+import os
+from models import db
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/')
+def hello_world():
+    return render_template('hello.html')
+
+basdir = os.path.abspath(os.path.dirname(__file__))
+dbfile = os.path.join(basdir, 'db.sqlite')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbfile
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'jqiowejrojzxcovnklqnweiorjqwoijroi'
+
+db.init_app(app)
+db.app = app
+db.create_all()
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5000, debug=True)
+```
+
+#### 17.2 app.py 동일 경로에 models.py 내용
+```python
+# models.py
+
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+class User(db.Model):
+    __tablename__ = 'user'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    userid = db.Column(db.String(32))
+    password = db.Column(db.String(128))   
+```
+
+
 #### 레퍼런스 및 부연설명
 - [ls 사용 옵션](https://withcoding.com/89)
 - [ps 사용 옵션](https://wonit.tistory.com/280)
+- [사이트 m. 같이 서브넷 만드는 방법](http://taewan.kim/oci_docs/10_quickstart/mapping_public_ip_to_domain/)
+
 
 ```shell 
 # 키워드 이름 뜻 설명
