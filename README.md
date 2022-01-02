@@ -278,7 +278,7 @@ flask run --host=0.0.0.0
 - [nuhup 원격접속 해제해도 process 실행](https://9d4u.tistory.com/1203)
 - [flask 백그라운드 실행 및 종료](https://wooiljeong.github.io/server/flask_nohup/)
 
-```
+```shell
 # 서버 진입
 $ ssh new_user@{URL or 서버IP} -i {인증서 .pem 경로}
 
