@@ -273,7 +273,39 @@ $ sudo reboot # 재부팅
 flask run --host=0.0.0.0
 ```
 
+
+## 14. 24시간 웹 호스팅 
+- [nuhup 원격접속 해제해도 process 실행](https://9d4u.tistory.com/1203)
+- [flask 백그라운드 실행 및 종료](https://wooiljeong.github.io/server/flask_nohup/)
+
+```
+# 서버 진입
+$ ssh new_user@{URL or 서버IP} -i {인증서 .pem 경로}
+
+# 13.1 에서 설정해놓은 가상환경 위치로 이동 후 실행
+$ source venv/bin/activate
+
+# Flask 실행
+# 13.1에서  FLASK_APP=app.py 로 저장했기 때문에 python으로 app.py 실행
+$ python app.py
+
+# 백그라운드에서 상시 실행하도록 설정
+$ nohup python -u app.py &
+# nohup : 원격 꺼도 process 안꺼지게 설정
+# & : 해당 프로세스를 background로 실행
+# 해당 명령의 return값으로 process id가 나온다.
+
+# 해당 id를 통해 process를 확인할 수 있다.
+$ ps -ef
+
+# 백그라운드 실행중인 flask 종료
+$ kill {process id}
+```
+
 #### 레퍼런스 및 부연설명
+- [ls 사용 옵션](https://withcoding.com/89)
+- [ps 사용 옵션](https://wonit.tistory.com/280)
+
 ```shell 
 # 키워드 이름 뜻 설명
 sudo : Supper User Do
@@ -281,7 +313,8 @@ su : Switch User
 chmod : Change Mode
 vi : Visual editor
 vim : vi + important
-ls : list segments
+ls : list segments (ls -al : 숨김 포함 자세히 보기)
+ps : process show (ps -ef : 커널이 아닌 모든 프로세스, 유닉스 포멧으로 보기)
 cd : change Directory
 mv : move(파일 위치 변경, 파일명 변경)
 cat : concatenate (내용 이어서 쓰기)
