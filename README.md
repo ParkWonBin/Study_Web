@@ -103,7 +103,7 @@ $ cat id_rsa # 파일 수정 => 내용 보기 목적
 # 5.4. Session > Saved Sessions = 이름 입력 > Save
 # SSH(.ppk) 파일만 있으면 해당 도메인에 user id 페스워드 없이 로그인 가능
 ```
-## 10. Mac  로그인 연결
+## 10. Mac 로그인 연결
 참고 :  [brew 다운로드](https://brew.sh/)  
 참고 :  [Mac putty](https://www.ssh.com/academy/ssh/putty/mac)  
 
@@ -151,7 +151,7 @@ ssh user@hostname -i {저장한 pem 파일 경로}.pem
 
 ## 11 Window 서버 로그인 연결
 ### 11.1 config 파일 생성하기
-```tesx
+```text
 파일 생성
 파일 경로 : C:\Users\{사용자명}\.ssh
 파일 이름 : config   (* 확장자 없음)
@@ -160,11 +160,11 @@ ssh user@hostname -i {저장한 pem 파일 경로}.pem
 Host {Host URL or 원격 IP}
   HostName {HostName}
   User {new_user}
-  IdentityFile {해당 User의 SSH key경로}
+  IdentityFile {해당 User의 SSH key 절대경로}
 Host {Host URL or 원격 IP}
   HostName {HostName}
   User {new_user}
-  IdentityFile {해당 User의 SSH key경로}---
+  IdentityFile {해당 User의 SSH key 절대경로}
 """
 ```
 ### 11.2 IdentityFile 생성
@@ -193,20 +193,26 @@ ssh {new_user}@{Host URL or 원격 IP}
 시작 > cmd 들어가서 해당 file 실행시키는 방법으로 사용 가능합
 ```
 
-
-## 12. VSCode로 PuTTY 연동
+## 12. VSCode로 서버 연
 참고 : [Could not establish connection](https://kkkapuq.tistory.com/108)
-VSCode 확장 : "Remot - development"
-사전준비 필수 : 11.1 ~ 11.3 과정 선행되어야 함
+준비 : 11.1, 11.2 과정 선행되어야 함
 
-12.1 VSCode Window로 서버 들어가기  
-``` 원격 탐색기 > SSH TARGETS > 도메인 > 새창으로 열기 ```
+#### 12.1 VSCode 확장 설치 
+``` 확장 : "Remot - development" ```
+
+#### 12.2 VSCode Window로 서버 들어가기  
+``` 
+1. VSC왼쪽 메뉴 > 원격 탐색기 클릭
+2. SSH TARGETS 으로 설정
+3. SSH TARGETS [+] 버튼 클릭
+4. ssh {new_user}@{URL or IP} 입력
+5. SSH TARGETS [톱늬바퀴] 버튼 클릭 > Settings > config파일 절대경로 입력(11.1에서 생성한거)
+6. SSH TARGET > 잡아노은 호스트 > 새창으로 열기 
+```
 
 12.2 Error > Could not establish connection  
 ``` 만약 연결 중에 에러가 발생하면 config 저장 경로에서 known_hosts 삭제 ```
 
-12.3 VSCode에서 PuTTY 터미널 이용  
-``` new VSCode Window(과정 10.5) 에서 터미널(T) > 새 터미널 ```
 
 ## 13. VSCode로 코딩할 준비 
 #### 13.1. Flask 설치
