@@ -303,6 +303,9 @@ $ nohup python -u app.py &
 # 해당 명령의 return값으로 process id가 나온다.
 
 # 해당 id를 통해 process를 확인할 수 있다.
+# process중 python 관련된 것 모두 보기
+$ ps -f -C python 
+# 모든 process 보기
 $ ps -ef
 
 # 백그라운드 실행중인 flask 종료
@@ -440,6 +443,8 @@ class User(db.Model):
     password = db.Column(db.String(128))   
 ```
 
+### Flask 관련 좋은 레퍼런스
+[위키독스 - flask](https://wikidocs.net/83975)
 
 #### 레퍼런스 및 부연설명
 - [ls 사용 옵션](https://withcoding.com/89)
